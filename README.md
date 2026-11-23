@@ -9,6 +9,12 @@ An interactive educational website for children that introduces computer hardwar
 3. Open your browser and navigate to: `http://localhost/KOMPUTERKU/`
 4. No database, no Composer, no npm — just Apache + PHP.
 
+## Visit Online
+
+1. Open any browser on your computer.
+2. Copy the link: https://komputerku.wuaze.com/
+3. Enjoy the learning!
+
 ## Features
 
 | Feature | Page | Description |
