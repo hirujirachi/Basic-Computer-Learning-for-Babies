@@ -85,6 +85,8 @@ include 'partials/header.php';
             </div>
           </div>
 
+          <div id="typingRewardArea" aria-live="polite"></div>
+
           <div class="btn-group">
             <button class="btn btn--primary" id="btnRestartResult">↺ Ulangi</button>
             <a href="games.php" class="btn btn--ghost">← Menu Game</a>

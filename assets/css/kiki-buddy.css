@@ -1,0 +1,12 @@
+.kiki-buddy{position:fixed;right:16px;bottom:16px;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none}
+.kiki-buddy>*{pointer-events:auto}
+.kiki-buddy__btn{width:72px;height:78px;border:0;border-radius:50%;background:var(--color-surface);box-shadow:0 6px 18px rgba(0,0,0,.18);cursor:pointer;display:grid;place-items:center;animation:kikiFloat 3s ease-in-out infinite}
+.kiki-buddy__btn:focus-visible{outline:3px solid var(--color-primary);outline-offset:3px}
+.kiki-buddy__btn.is-jump{animation:kikiJump .5s ease}
+.kiki-buddy__bubble{max-width:260px;padding:12px 14px;background:var(--color-surface);border:3px solid var(--color-secondary);border-radius:18px 18px 4px 18px;font-weight:700;font-size:.95rem;color:var(--color-text);box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.sparkle{position:fixed;z-index:950;pointer-events:none;font-size:20px;transform:translate(-50%,-50%);animation:sparkleOut .9s ease-out forwards}
+@keyframes kikiFloat{50%{transform:translateY(-6px)}}
+@keyframes kikiJump{30%{transform:translateY(-22px) rotate(-8deg)}60%{transform:translateY(0) rotate(6deg)}}
+@keyframes sparkleOut{to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.4)}}
+@media (prefers-reduced-motion:reduce){.kiki-buddy__btn,.kiki-buddy__btn.is-jump{animation:none}}
+@media print{.kiki-buddy{display:none}}

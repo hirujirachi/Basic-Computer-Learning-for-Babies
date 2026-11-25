@@ -2,6 +2,7 @@ import { storage } from './storage.js';
 import { unlockBadge } from './narration-badges.js';
 import { sounds } from './sound.js';
 import { launchConfetti } from './confetti.js';
+import { Rewards } from './rewards.js';
 
 const GAME_DURATION = 30; // seconds
 const TARGET_TIMEOUT = 1800; // ms before auto-dismiss
@@ -160,6 +161,9 @@ function endGame() {
   if (isNew) storage.setMouseBest(score);
   unlockBadge('match_played');
 
+  // Claim Byte Coin reward
+  const rewardResult = Rewards.claim('mouse_complete');
+
   // Show result
   const rPanel = resultPanel();
   const gPanel = gamePanel();
@@ -178,6 +182,16 @@ function endGame() {
     document.getElementById('resultMessage').textContent = msg;
 
     if (isNew && score > 0) launchConfetti(3000);
+
+    // Show reward notification
+    const rewardArea = document.getElementById('mouseRewardArea');
+    if (rewardArea) {
+      if (rewardResult.granted) {
+        rewardArea.innerHTML = `<div class="reward-notification"><span class="reward-notification__icon">🪙</span> Kamu mendapat +${rewardResult.amount} Byte Coin!</div>`;
+      } else if (rewardResult.alreadyClaimed) {
+        rewardArea.innerHTML = `<div class="reward-notification reward-notification--muted">Hadiah untuk aktivitas ini sudah kamu terima.</div>`;
+      }
+    }
   }
 }
 

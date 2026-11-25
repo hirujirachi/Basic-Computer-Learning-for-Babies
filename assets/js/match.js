@@ -1,6 +1,7 @@
 import { sounds } from './sound.js';
 import { launchConfetti } from './confetti.js';
 import { unlockBadge } from './narration-badges.js';
+import { Rewards } from './rewards.js';
 
 // --- SVG icons for each hardware item ---
 const svgIcons = {
@@ -256,9 +257,23 @@ function showWin() {
   sounds.success?.();
   unlockBadge('match_played');
   launchConfetti(4000);
+
+  // Claim Byte Coin reward
+  const result = Rewards.claim('match_complete');
+
   const win = document.getElementById('winPanel');
   win.style.display = 'flex';
   win.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Show reward notification in win panel
+  const rewardArea = document.getElementById('matchRewardArea');
+  if (rewardArea) {
+    if (result.granted) {
+      rewardArea.innerHTML = `<div class="reward-notification"><span class="reward-notification__icon">🪙</span> Kamu mendapat +${result.amount} Byte Coin!</div>`;
+    } else if (result.alreadyClaimed) {
+      rewardArea.innerHTML = `<div class="reward-notification reward-notification--muted">Hadiah untuk aktivitas ini sudah kamu terima.</div>`;
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

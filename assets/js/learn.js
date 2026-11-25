@@ -2,6 +2,7 @@ import { storage } from './storage.js';
 import { launchConfetti } from './confetti.js';
 import { sounds } from './sound.js';
 import { unlockBadge } from './narration-badges.js';
+import { Rewards } from './rewards.js';
 
 const TOTAL_STEPS = 5;
 
@@ -302,8 +303,12 @@ function finish() {
   sounds.success?.();
   launchConfetti(4000);
   unlockBadge('learn_done');
+  // Claim Byte Coin reward
+  _learnRewardResult = Rewards.claim('learn_complete');
   showCompletion();
 }
+
+let _learnRewardResult = null;
 
 function showCompletion() {
   const bar = document.getElementById('progressFill');
@@ -312,11 +317,22 @@ function showCompletion() {
   if (label) label.textContent = `Langkah ${TOTAL_STEPS} dari ${TOTAL_STEPS}`;
   document.querySelectorAll('.step-dot').forEach(d => { d.classList.remove('is-active'); d.classList.add('is-done'); });
 
+  // Build reward message
+  let rewardHTML = '';
+  if (_learnRewardResult) {
+    if (_learnRewardResult.granted) {
+      rewardHTML = `<div class="reward-notification"><span class="reward-notification__icon">🪙</span> Kamu mendapat +${_learnRewardResult.amount} Byte Coin!</div>`;
+    } else if (_learnRewardResult.alreadyClaimed) {
+      rewardHTML = `<div class="reward-notification reward-notification--muted">Hadiah untuk aktivitas ini sudah kamu terima.</div>`;
+    }
+  }
+
   stepContainer.innerHTML = `
     <div class="completion-screen">
       <span class="completion-screen__trophy" aria-hidden="true">🏆</span>
       <h2 class="completion-screen__title">Hebat! Kamu sudah selesai!</h2>
       <p class="completion-screen__sub">Kamu sudah mengenal semua bagian komputer. Sekarang waktunya bermain! 🎉</p>
+      ${rewardHTML}
       <div class="btn-group">
         <a href="games.php" class="btn btn--primary">🎮 Ke Kuis &amp; Permainan</a>
         <a href="index.php" class="btn btn--ghost">🏠 Kembali ke Beranda</a>

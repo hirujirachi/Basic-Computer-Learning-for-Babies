@@ -40,6 +40,7 @@ include 'partials/header.php';
           <div class="quiz-result__label">soal dijawab dengan benar</div>
           <div class="quiz-result__best" id="resultBest"></div>
           <p class="quiz-result__message" id="resultMessage"></p>
+          <div id="quizRewardArea" aria-live="polite" style="margin-bottom:var(--space-4)"></div>
           <div class="btn-group">
             <a href="games.php" class="btn btn--ghost">← Menu Game</a>
             <button class="btn btn--primary" id="btnUlangi">↺ Ulangi Kuis</button>

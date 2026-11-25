@@ -45,6 +45,7 @@ include 'partials/header.php';
       <span class="match-win__emoji" aria-hidden="true">🎉</span>
       <h2 class="match-win__title">Hebat! Semua cocok!</h2>
       <p style="color:var(--color-text-muted);margin-bottom:var(--space-5)">Kamu berhasil mencocokkan semua gambar! 👍</p>
+      <div id="matchRewardArea" aria-live="polite"></div>
       <div class="btn-group">
         <button class="btn btn--primary" id="btnRestart">🔄 Main Lagi</button>
         <a href="games.php" class="btn btn--ghost">← Kembali ke Menu Game</a>

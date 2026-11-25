@@ -24,6 +24,8 @@ $baseAssets = '';
   <link rel="stylesheet" href="<?= $baseAssets ?>assets/css/base.css">
   <link rel="stylesheet" href="<?= $baseAssets ?>assets/css/components.css">
   <link rel="stylesheet" href="<?= $baseAssets ?>assets/css/extras.css">
+  <link rel="stylesheet" href="<?= $baseAssets ?>assets/css/kiki-buddy.css">
+  <link rel="stylesheet" href="<?= $baseAssets ?>assets/css/pet.css">
   <?php if ($pageCSS): ?>
   <link rel="stylesheet" href="<?= $baseAssets ?>assets/css/<?= htmlspecialchars($pageCSS) ?>">
   <?php endif; ?>

@@ -14,6 +14,7 @@ const BADGE_CATALOG = [
   { id: 'extra_match_done', emoji: '🔌', name: 'Ahli Perangkat',         desc: 'Menyelesaikan permainan perangkat tambahan' },
   { id: 'match_played',     emoji: '🃏', name: 'Pemain Kartu',           desc: 'Memainkan permainan memori' },
   { id: 'typing_played',    emoji: '⌨️', name: 'Juru Ketik',             desc: 'Mencoba latihan mengetik' },
+  { id: 'io_sort',          emoji: '⬇️', name: 'Jago Input Output',      desc: 'Menyelesaikan game Input atau Output' },
   { id: 'named_player',     emoji: '🌟', name: 'Punya Nama',             desc: 'Mengatur nama pemain' },
 ];
 

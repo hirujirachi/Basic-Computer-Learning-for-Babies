@@ -4,6 +4,7 @@
 import { storage } from './storage.js';
 import { launchConfetti } from './confetti.js';
 import { sounds } from './sound.js';
+import { Rewards } from './rewards.js';
 
 const PARTS = ['keyboard','mouse','monitor','pc'];
 
@@ -49,6 +50,17 @@ function showVictory() {
   if (game)  game.style.display  = 'none';
   launchConfetti(5000);
   sounds.success?.();
+
+  // Claim Byte Coin reward
+  const result = Rewards.claim('fmc_complete');
+  const rewardArea = document.getElementById('fmcRewardArea');
+  if (rewardArea) {
+    if (result.granted) {
+      rewardArea.innerHTML = `<div class="reward-notification"><span class="reward-notification__icon">🪙</span> Kamu mendapat +${result.amount} Byte Coin!</div>`;
+    } else if (result.alreadyClaimed) {
+      rewardArea.innerHTML = `<div class="reward-notification reward-notification--muted">Hadiah untuk aktivitas ini sudah kamu terima.</div>`;
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

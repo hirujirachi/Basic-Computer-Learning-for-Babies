@@ -83,6 +83,21 @@ include 'partials/header.php';
             </div>
           </a>
 
+
+          <a href="io-sort.php" class="game-card game-card--extra" aria-label="Input atau Output – Kelompokkan perangkat komputer">
+            <div class="game-card__header">
+              <div class="game-card__emoji" aria-hidden="true">⬇️</div>
+              <div>
+                <h3 class="game-card__title">Input atau Output?</h3>
+                <span class="game-card__tag">Tebak Cepat</span>
+              </div>
+            </div>
+            <p class="game-card__desc">Benda jatuh dari atas! Tebak apakah ia perangkat Input atau Output sebelum sampai ke bawah!</p>
+            <div class="game-card__footer">
+              <span class="game-card__play">Main Sekarang →</span>
+            </div>
+          </a>
+
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import { sounds } from './sound.js';
 import { launchConfetti } from './confetti.js';
 import { unlockBadge } from './narration-badges.js';
+import { Rewards } from './rewards.js';
 
 const WORD_POOL = [
   'kucing','buku','komputer','mouse','layar',
@@ -190,6 +191,17 @@ function endRound() {
   launchConfetti(3500);
   sounds.success?.();
   unlockBadge('typing_played');
+
+  // Claim Byte Coin reward
+  const result = Rewards.claim('typing_complete');
+  const rewardArea = el('typingRewardArea');
+  if (rewardArea) {
+    if (result.granted) {
+      rewardArea.innerHTML = `<div class="reward-notification"><span class="reward-notification__icon">🪙</span> Kamu mendapat +${result.amount} Byte Coin!</div>`;
+    } else if (result.alreadyClaimed) {
+      rewardArea.innerHTML = `<div class="reward-notification reward-notification--muted">Hadiah untuk aktivitas ini sudah kamu terima.</div>`;
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

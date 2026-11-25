@@ -2,6 +2,7 @@ import { storage } from './storage.js';
 import { sounds } from './sound.js';
 import { launchConfetti } from './confetti.js';
 import { unlockBadge } from './narration-badges.js';
+import { Rewards } from './rewards.js';
 
 // Quiz data — questions in fixed order, answers in fixed order
 const questions = [
@@ -188,6 +189,26 @@ function showResults() {
 
   if (score === 5) launchConfetti(4000);
   else if (score >= 3) launchConfetti(2500);
+
+  // Claim Byte Coin reward using tier difference rule
+  let rewardResult = { granted: false, amount: 0, alreadyClaimed: false };
+  if (score >= 5) {
+    rewardResult = Rewards.claim('quiz_5');
+  } else if (score >= 4) {
+    rewardResult = Rewards.claim('quiz_4');
+  } else if (score >= 3) {
+    rewardResult = Rewards.claim('quiz_3');
+  }
+
+  // Show reward notification
+  const rewardArea = el('quizRewardArea');
+  if (rewardArea) {
+    if (rewardResult.granted && rewardResult.amount > 0) {
+      rewardArea.innerHTML = `<div class="reward-notification"><span class="reward-notification__icon">🪙</span> Kamu mendapat +${rewardResult.amount} Byte Coin!</div>`;
+    } else if (rewardResult.alreadyClaimed || (score >= 3 && !rewardResult.granted)) {
+      rewardArea.innerHTML = `<div class="reward-notification reward-notification--muted">Hadiah untuk nilai ini sudah kamu terima.</div>`;
+    }
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {

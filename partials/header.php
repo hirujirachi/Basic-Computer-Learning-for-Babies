@@ -12,6 +12,8 @@ $navItems = [
   ['href' => 'extra-hardware.php', 'key' => 'extra',      'label' => 'Perangkat Tambahan'],
   ['href' => 'games.php',          'key' => 'games',      'label' => 'Kuis &amp; Permainan'],
   ['href' => 'fmc.php',            'key' => 'fmc',        'label' => 'Fix My Computer'],
+  ['href' => 'shop.php',           'key' => 'shop',       'label' => 'Toko Bitty'],
+  ['href' => 'my-bitty.php',       'key' => 'my-bitty',   'label' => 'My Bitty'],
 ];
 ?>
 <header class="site-header" role="banner">
@@ -70,8 +72,10 @@ $navItems = [
   import { storage } from './<?= $baseAssets ?>assets/js/storage.js';
   import { initSound } from './<?= $baseAssets ?>assets/js/sound.js';
   import { initPlayerProfile } from './<?= $baseAssets ?>assets/js/player-profile.js';
+  import { initPetHUD } from './<?= $baseAssets ?>assets/js/pet-hud.js';
 
   initPlayerProfile();
+  initPetHUD();
 
   // Nav toggle
   const toggle = document.getElementById('navToggle');

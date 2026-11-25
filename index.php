@@ -66,6 +66,25 @@ include 'partials/header.php';
       </div>
     </section>
 
+    <!-- ===== BITTY HERO BLOCK ===== -->
+    <section class="bitty-hero-block" aria-label="Bitty – teman virtual kamu">
+      <div class="bitty-hero-block__pet">
+        <div id="bittyHomeWidget" style="position:relative;display:flex;flex-direction:column;align-items:center;"></div>
+      </div>
+      <div class="bitty-hero-block__info">
+        <h2 class="bitty-hero-block__name" id="bittyNameDisplay">Bitty</h2>
+        <div class="bitty-hero-block__bc" aria-live="polite">
+          <span class="bitty-hero-block__bc-icon" aria-hidden="true">🪙</span>
+          <span class="bitty-hero-block__bc-amount" id="bittyHomeBcAmount">0</span>
+          <span> Byte Coin</span>
+        </div>
+        <div class="bitty-hero-block__actions">
+          <a href="my-bitty.php" class="btn btn--secondary">🐾 My Bitty</a>
+          <a href="shop.php" class="btn btn--accent">🛍️ Toko Bitty</a>
+        </div>
+      </div>
+    </section>
+
     <?php
     $mascotMessage = 'Halo teman! Aku Kiki! Ayo mulai petualangan belajar komputermu hari ini! Pilih menu di bawah ya! 🎉';
     $mascotSize    = 'md';
@@ -139,6 +158,7 @@ include 'partials/header.php';
   <section class="badge-section container" aria-label="Koleksi Lencana">
     <h2 class="badge-section__title">🏅 Koleksi Lencana</h2>
     <div class="badge-shelf" id="badgeShelf" aria-label="Koleksi lencana yang dimiliki"></div>
+    <p style="text-align:center;margin-top:20px"><a href="certificate.php" class="btn btn--primary btn--lg">🎓 Ambil Sertifikatku</a></p>
   </section>
 
 </main>
@@ -148,6 +168,9 @@ include 'partials/header.php';
 <script type="module">
   import { storage } from './assets/js/storage.js';
   import { renderBadgeShelf, isBadgeUnlocked } from './assets/js/narration-badges.js';
+  import { Rewards, } from './assets/js/rewards.js';
+  import { PET_NAME } from './assets/js/pet-catalog.js';
+  import { initBittyWidget } from './assets/js/bitty-behavior.js';
 
   const learnDone = storage.isLearnDone();
   const fmcDone   = storage.isFmcDone();
@@ -183,6 +206,29 @@ include 'partials/header.php';
   }
 
   renderBadgeShelf(document.getElementById('badgeShelf'));
+
+  // ---- Bitty home widget ----
+  const bittyWidget = document.getElementById('bittyHomeWidget');
+  if (bittyWidget) {
+    // Show Bitty name from catalog
+    const nameEl = document.getElementById('bittyNameDisplay');
+    if (nameEl) nameEl.textContent = PET_NAME;
+
+    // Show current BC
+    const bcEl = document.getElementById('bittyHomeBcAmount');
+    if (bcEl) bcEl.textContent = Rewards.getBalance();
+
+    // Listen for bc:changed and update display
+    window.addEventListener('bc:changed', (e) => {
+      if (bcEl) bcEl.textContent = e.detail.balance;
+    });
+
+    // Init behavior widget with greeting
+    const behavior = initBittyWidget(bittyWidget, { size: 'lg', greeting: true });
+
+    // Cleanup on page hide
+    window.addEventListener('pagehide', () => behavior?.destroy());
+  }
 </script>
 </body>
 </html>

@@ -138,6 +138,7 @@ include 'partials/header.php';
         <p style="color:var(--color-text-muted);margin-bottom:var(--space-6)">
           Kamu berhasil memperbaiki semua bagian komputer. Luar biasa! 🎉
         </p>
+        <div id="fmcRewardArea" aria-live="polite" style="margin-bottom:var(--space-4)"></div>
         <div class="btn-group">
           <button class="btn btn--primary" id="btnPlayAgain">🔄 Main Lagi</button>
           <a href="index.php" class="btn btn--ghost">🏠 Kembali ke Beranda</a>

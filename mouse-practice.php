@@ -60,6 +60,7 @@ include 'partials/header.php';
         <div class="mouse-result__label">target berhasil diklik</div>
         <div class="mouse-result__best" id="resultBest"></div>
         <p class="mouse-result__message" id="resultMessage"></p>
+        <div id="mouseRewardArea" aria-live="polite"></div>
         <div class="btn-group">
           <button class="btn btn--primary" id="btnRestartResult">↺ Ulangi</button>
           <a href="games.php" class="btn btn--ghost">← Menu Game</a>
